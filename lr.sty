@@ -1,0 +1,141 @@
+\usepackage[14pt]{extsizes}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{mathtext}
+\usepackage[T1,T2A,TS1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{makecell}
+\usepackage{titlesec}
+\usepackage{etoolbox}
+\usepackage{xinttools}
+\usepackage{listings}
+\usepackage{indentfirst}
+\usepackage{fancyhdr}
+
+\hoffset=-0.54cm
+\voffset=-0.54cm
+\topmargin=0mm
+\marginparwidth=0mm
+\marginparsep=0mm
+\oddsidemargin=0mm
+\evensidemargin=0mm
+\textwidth=170mm
+\textheight=257mm
+\headheight=0mm
+\headsep=0mm
+
+\titleformat*{\section}{}
+\titleformat*{\subsection}{}
+\titleformat*{\subsubsection}{}
+\titleformat*{\paragraph}{}
+\titleformat*{\subparagraph}{}
+
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\graphicspath{ {images/} }
+
+\newcommand{\facultyLongName}{}
+\newcommand{\facultyShortName}{}
+\newcommand{\cathedraLongName}{}
+\newcommand{\cathedraShortName}{}
+
+\newcommand{\setFacultyLongName  }[1]{\renewcommand{\facultyLongName  }{#1}}
+\newcommand{\setFacultyShortName }[1]{\renewcommand{\facultyShortName }{#1}}
+\newcommand{\setCathedraLongName }[1]{\renewcommand{\cathedraLongName }{#1}}
+\newcommand{\setCathedraShortName}[1]{\renewcommand{\cathedraShortName}{#1}}
+
+\newcommand{\lrnumber}{}
+\newcommand{\lrname}{}
+\newcommand{\discipline}{}
+\newcommand{\varnumber}{}
+
+\newcommand{\setLrNumber}[1]{\renewcommand{\lrnumber}{#1}}
+\newcommand{\setLrName}[1]{\renewcommand{\lrname}{#1}}
+\newcommand{\setDiscipline}[1]{\renewcommand{\discipline}{#1}}
+\newcommand{\setVarNumber}[1]{\renewcommand{\varnumber}{#1}}
+
+\newcommand{\teacher}{}
+\newcommand{\teacherDegree}{}
+
+\newcommand{\setTeacher}[1]{\renewcommand{\teacher}{#1}}
+\newcommand{\setTeacherDegree}[1]{\renewcommand{\teacherDegree}{#1}}
+
+\newcommand{\studGroupPairs}{}
+\newcommand{\setStudentGroupPairs}[1]{\renewcommand{\studGroupPairs}{#1}}
+
+\newcommand{\student}{}
+\newcommand{\group}{}
+
+\newcommand{\setGroup}[1]{
+	\renewcommand{\group}{#1}
+	\setStudentGroupPairs{(\student, \group)}
+}
+\newcommand{\setStudent}[1]{
+	\renewcommand{\student}{#1}
+	\setStudentGroupPairs{(\student, \group)}
+}
+
+\newcommand{\TL}{
+\begin{titlepage}
+
+\thispagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+
+\begin{tabularx}{\textwidth}{cX}
+\raisebox{-1.2\height}{\includegraphics[width=2cm]{bmstu_logo}} & \noindent\centering\small
+	\textbf{Министерство образования и науки Российской~Федерации}\par
+	\vspace{3mm}
+	\textbf{Федеральное государственное бюджетное образовательное учреждение высшего образования}\par
+	\vspace{3mm}
+	\textbf{<<Московский государственный технический университет имени~Н.Э.\,Баумана}\par\textbf{(национальный исследовательский университет)>>}\par\textbf{(МГТУ~им.~Н.Э.\,Баумана)}
+	\vspace{3mm}
+ \tabularnewline
+ \Xhline{3\arrayrulewidth}
+\end{tabularx}
+
+    \vspace{0.25cm}
+
+\begin{center}    
+    Факультет <<\facultyLongName>> (\facultyShortName)
+    
+    Кафедра <<\cathedraLongName>> (\cathedraShortName)
+    \vfill
+    
+    \MakeUppercase{Отчёт}\\
+    \vspace{10mm}
+    \MakeUppercase{\lrname}\\
+    \vspace{10mm}
+    <<\discipline >>\\
+    (лабораторная работа \textnumero\,\lrnumber\ifdefempty{\tcontr}{}{, вариант \varnumber}) \\
+    
+  \bigskip
+\end{center}
+\vfill
+
+\begin{tabularx}{\textwidth}{XcL{5cm}}
+\xintForpair ##1##2 in {\studGroupPairs}\do
+{
+Студент группы ##2 & \underline{\hspace{3cm}} & ##1 \\
+& \small (подпись, дата) & \small (Фамилия И.О.) \\     
+}
+\ifdefempty{\teacher}{}{
+\rule{0pt}{10mm}Руководитель \teacherDegree & \underline{\hspace{3cm}} & \teacher \\
+& \small (подпись, дата) & \small (Фамилия И.О.) \\
+}
+\end{tabularx}
+
+\vfill
+
+
+\cfoot{\normalsize Москва, \the\year}
+\end{titlepage}
+
+}
+
+\newenvironment{labReport}{\TL}{}
