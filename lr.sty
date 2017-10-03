@@ -41,6 +41,15 @@
 
 \lstset{basicstyle=\ttfamily,breaklines=true}
 
+\newbool{breakSections}
+\boolfalse{breakSections}
+
+\makeatletter
+\def\@biblabel#1{#1. }
+\makeatother
+
+\renewcommand\labelitemi{--}
+
 \newcommand{\facultyLongName}{}
 \newcommand{\facultyShortName}{}
 \newcommand{\cathedraLongName}{}
@@ -83,6 +92,11 @@
 }
 
 \newcommand{\TL}{
+
+\ifbool{breakSections} {
+	\newcommand{\sectionbreak}{\clearpage}
+}
+
 \begin{titlepage}
 
 \thispagestyle{fancy}
