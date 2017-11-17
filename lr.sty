@@ -1,8 +1,15 @@
 \usepackage[14pt]{extsizes}
 \usepackage{amsmath,amsthm,amssymb}
 \usepackage{mathtext}
-\usepackage[T1,T2A,TS1]{fontenc}
-\usepackage[utf8]{inputenc}
+
+\usepackage{fontspec}
+\setmainfont{CMU Serif}[Ligatures=TeX]
+\setsansfont{CMU Sans Serif}[Ligatures=TeX]
+\newfontfamily{\cyrillicfonttt}{Courier New}
+\setmonofont{Courier New}
+\usepackage[cache=false]{minted}
+\usepackage{spverbatim}
+
 \usepackage[english,russian]{babel}
 \usepackage{tabularx}
 \usepackage{float}
@@ -14,6 +21,7 @@
 \usepackage{listings}
 \usepackage{indentfirst}
 \usepackage{fancyhdr}
+\usepackage{setspace}
 
 \hoffset=-0.54cm
 \voffset=-0.54cm
@@ -26,6 +34,8 @@
 \textheight=257mm
 \headheight=0mm
 \headsep=0mm
+
+\tolerance=10000
 
 \titleformat*{\section}{}
 \titleformat*{\subsection}{}
@@ -49,6 +59,17 @@
 \makeatother
 
 \renewcommand\labelitemi{--}
+
+\addto\captionsrussian{\renewcommand{\figurename}{Рисунок}}
+\usepackage[utf8]{inputenc}
+\usepackage{caption}
+
+\DeclareCaptionLabelSeparator{mydash}{ -- }
+\captionsetup{
+   labelsep=mydash
+}
+
+\onehalfspacing
 
 \newcommand{\facultyLongName}{}
 \newcommand{\facultyShortName}{}
